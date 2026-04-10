@@ -86,22 +86,22 @@ export const siteConfig = {
 
   // ── How It Works ──────────────────────────────────────────
   process: [
-    { step: '01', title: 'Get in Touch', description: 'Drop Ash a WhatsApp message or give him a call for a free, no-obligation quote.' },
-    { step: '02', title: 'Get Your Quote', description: 'Ash will get back to you with an honest price — no hidden fees, no surprises.' },
-    { step: '03', title: 'Text Reminder', description: 'You\'ll get a text the night before your clean so you\'re always in the loop.' },
-    { step: '04', title: 'Job Done', description: 'Ash turns up, does a great job, and you can set up a regular schedule if you like.' },
+    { step: '01', title: 'Get in Touch', description: 'WhatsApp or call Ash for a free quote. No obligation, no pressure.' },
+    { step: '02', title: 'Get Your Price', description: 'Ash gets back to you with an honest price. What he quotes is what you pay.' },
+    { step: '03', title: 'On the Schedule', description: 'Ash puts you on a regular schedule. Same routine, no need to rebook each time.' },
+    { step: '04', title: 'Text the Night Before', description: 'Ash texts you the evening before to confirm he\'s coming. No wondering, no chasing.' },
   ],
 
   // ── About ─────────────────────────────────────────────────
   about: {
     founderName: 'Ash',
-    founderRole: 'Founder & Operator',
-    bio: 'Before Smart Water, Ash spent years in construction driving articulated dump trucks. When a friend told him about window cleaning, he gave it a go — and never looked back.\n\nFour and a half years later, Ash has built Smart Water into one of the most trusted cleaning services in Doncaster. With 350+ regular customers and 69 five-star reviews, the work speaks for itself. From a single set of windows to a full exterior clean — gutters, fascias, soffits, conservatory roofs — Ash does it all personally, so the standard never drops.',
-    philosophy: 'Smart Water runs on a simple idea: treat every house like it\'s your own. That means turning up when you say you will, texting the night before so customers know you\'re coming, and doing a proper job from start to finish.',
+    founderRole: 'Owner & Operator',
+    bio: 'Ash served in the British Army as a tank driver. After leaving, he moved into construction driving articulated dump trucks. Good work, but long hours building someone else\'s thing.\n\nHe wanted something of his own. A mate told him about window cleaning, and Smart Water was born.\n\nFour and a half years on, he\'s got over 350 regular customers and dozens of five-star reviews. Most of that came through word of mouth. People tell their neighbours. That\'s the bit he\'s most proud of.\n\nAsh still does every job himself. Windows, gutters, fascias, soffits, conservatory roofs. If it needs cleaning on the outside of your house, he\'ll sort it.',
+    philosophy: 'Ash texts you the night before to confirm he\'s coming. He turns up when he says he will. Does a proper job. Treats your house like it\'s his own. That\'s it. No gimmicks.',
     values: [
-      { title: 'Reliable', description: 'You\'ll get a text reminder the night before every clean. No guessing, no missed appointments.' },
-      { title: 'Honest Pricing', description: 'All prices are upfront. No hidden extras — frames, sills and doors are always included.' },
-      { title: 'Fully Insured', description: 'Public liability insurance for complete peace of mind on every job.' },
+      { title: 'Reliable', description: 'Text the night before to confirm. Turns up on time. Regular schedule you can count on.' },
+      { title: 'Honest Prices', description: 'What Ash quotes is what you pay. Frames, sills and doors always included.' },
+      { title: 'Fully Insured', description: 'Public liability insurance on every job. Pure water system, no harsh chemicals.' },
     ],
   },
 
