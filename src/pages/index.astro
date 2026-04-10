@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import NewsletterCTA from '../components/NewsletterCTA.astro';
+import ArcMotif from '../components/ArcMotif.astro';
+import { siteConfig } from '../site.config';
+
+const { hero, services, credibility } = siteConfig;
+---
+
+<BaseLayout
+  title={`${siteConfig.name} — ${siteConfig.tagline}`}
+  description={siteConfig.seo.defaultDescription}
+>
+  <!-- ── Hero ──────────────────────────────────────────────── -->
+  <section class="section relative pt-24 pb-16 md:pt-32 md:pb-24">
+    <div class="max-w-3xl">
+      <div class="accent-line"></div>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold leading-[1.08] mb-6 animate-fade-in">
+        {hero.headline}
+      </h1>
+      <p class="text-lg sm:text-xl text-[var(--color-text-secondary)] leading-relaxed mb-10 max-w-2xl animate-fade-in-up" style="animation-delay: 0.2s;">
+        {hero.subline}
+      </p>
+      <div class="flex flex-wrap gap-4 animate-fade-in-up" style="animation-delay: 0.4s;">
+        <a href={hero.cta.href} class="btn-primary">
+          {hero.cta.text}
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href={hero.secondaryCta.href} class="btn-secondary">
+          {hero.secondaryCta.text}
+        </a>
+      </div>
+    </div>
+
+    <!-- Decorative arc -->
+    <div class="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 hidden lg:block">
+      <ArcMotif />
+    </div>
+  </section>
+
+  <!-- ── Services ──────────────────────────────────────────── -->
+  <section class="section pt-8">
+    <div class="accent-line reveal"></div>
+    <h2 class="section-heading reveal">What We Do</h2>
+    <p class="section-subline reveal">
+      Core capabilities that drive results.
+    </p>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {services.map((service, i) => (
+        <ServiceCard
+          title={service.title}
+          description={service.description}
+          icon={service.icon}
+          index={i}
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- ── Credibility ───────────────────────────────────────── -->
+  <section class="section">
+    <div class="glass-surface p-12 reveal">
+      <h2 class="text-center font-heading font-bold text-2xl mb-10 text-white">
+        {credibility.heading}
+      </h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-8 text-center">
+        {credibility.stats.map((stat) => (
+          <div>
+            <div class="text-3xl sm:text-4xl font-heading font-bold gradient-text mb-2">
+              {stat.value}
+            </div>
+            <div class="text-sm text-[var(--color-text-secondary)]">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Newsletter CTA ────────────────────────────────────── -->
+  <NewsletterCTA />
+
+  <!-- ── Contact CTA ───────────────────────────────────────── -->
+  <section class="section text-center reveal">
+    <ArcMotif class="mx-auto mb-8" />
+    <h2 class="section-heading">Ready to get started?</h2>
+    <p class="section-subline mx-auto">
+      Let&rsquo;s have a conversation about how we can help.
+    </p>
+    <a href="/contact" class="btn-primary">
+      Get in Touch
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </section>
+</BaseLayout>

@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../site.config';
+
+const { name, email, url, location } = siteConfig;
+const lastUpdated = '2024-01-01'; // Update when policy changes
+---
+
+<BaseLayout
+  title={`Privacy Policy — ${name}`}
+  description={`Privacy policy for ${name}. Learn how we handle your data.`}
+>
+  <section class="section pt-24 md:pt-32 max-w-3xl">
+    <div class="accent-line reveal"></div>
+    <h1 class="section-heading reveal">Privacy Policy</h1>
+    <p class="text-sm text-[var(--color-text-secondary)] mb-12 reveal">Last updated: {lastUpdated}</p>
+
+    <div class="prose-content space-y-8 reveal">
+      <div>
+        <h2>1. Introduction</h2>
+        <p>
+          {name} (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) is committed to protecting
+          your personal data and respecting your privacy. This Privacy Policy explains how we collect,
+          use, and protect information when you visit <a href={url}>{url}</a>.
+        </p>
+      </div>
+
+      <div>
+        <h2>2. Data Controller</h2>
+        <p>
+          {name}<br/>
+          {location && <>{location}<br/></>}
+          <a href={`mailto:${email}`}>{email}</a>
+        </p>
+      </div>
+
+      <div>
+        <h2>3. Information We Collect</h2>
+        <p>We may collect the following information:</p>
+        <ul>
+          <li><strong>Contact information</strong> &mdash; name, email address, and message content when you use our contact form.</li>
+          <li><strong>Usage data</strong> &mdash; anonymised analytics data including pages visited, time on site, and referring URLs.</li>
+          <li><strong>Technical data</strong> &mdash; browser type, operating system, and IP address (anonymised).</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>4. How We Use Your Information</h2>
+        <p>We use your information to:</p>
+        <ul>
+          <li>Respond to your enquiries and provide requested services.</li>
+          <li>Improve our website and user experience.</li>
+          <li>Comply with legal obligations.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>5. Legal Basis for Processing (GDPR)</h2>
+        <p>We process your data based on:</p>
+        <ul>
+          <li><strong>Consent</strong> &mdash; when you submit a contact form or subscribe to our newsletter.</li>
+          <li><strong>Legitimate interest</strong> &mdash; to improve our services and website performance.</li>
+          <li><strong>Legal obligation</strong> &mdash; to comply with applicable laws.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>6. Data Sharing</h2>
+        <p>
+          We do not sell your personal data. We may share data with trusted service providers
+          (e.g., hosting, analytics) who process it on our behalf under strict data protection agreements.
+        </p>
+      </div>
+
+      <div>
+        <h2>7. Data Retention</h2>
+        <p>
+          We retain personal data only as long as necessary to fulfil the purposes outlined in this policy,
+          or as required by law. Contact form submissions are retained for up to 24 months.
+        </p>
+      </div>
+
+      <div>
+        <h2>8. Your Rights</h2>
+        <p>Under GDPR, you have the right to:</p>
+        <ul>
+          <li>Access your personal data.</li>
+          <li>Rectify inaccurate data.</li>
+          <li>Request erasure of your data.</li>
+          <li>Restrict or object to processing.</li>
+          <li>Data portability.</li>
+          <li>Withdraw consent at any time.</li>
+        </ul>
+        <p>To exercise these rights, contact us at <a href={`mailto:${email}`}>{email}</a>.</p>
+      </div>
+
+      <div>
+        <h2>9. Cookies</h2>
+        <p>
+          This website uses only essential cookies required for site functionality. We do not use
+          tracking cookies or third-party advertising cookies.
+        </p>
+      </div>
+
+      <div>
+        <h2>10. Changes to This Policy</h2>
+        <p>
+          We may update this policy from time to time. Changes will be posted on this page with an
+          updated &ldquo;Last updated&rdquo; date.
+        </p>
+      </div>
+
+      <div>
+        <h2>11. Contact</h2>
+        <p>
+          For any privacy-related questions, contact us at{' '}
+          <a href={`mailto:${email}`}>{email}</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .prose-content h2 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.75rem;
+  }
+
+  .prose-content p {
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+    margin-bottom: 0.5rem;
+  }
+
+  .prose-content ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+  }
+
+  .prose-content li {
+    margin-bottom: 0.25rem;
+  }
+
+  .prose-content a {
+    color: var(--color-accent);
+  }
+
+  .prose-content a:hover {
+    text-decoration: underline;
+  }
+</style>

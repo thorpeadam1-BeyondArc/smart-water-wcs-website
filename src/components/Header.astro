@@ -1,0 +1,85 @@
+---
+import { siteConfig } from '../site.config';
+import Logo from './Logo.astro';
+
+const pages = siteConfig.pages;
+
+const navLinks = [
+  pages.about && { label: 'About', href: '/about' },
+  pages.services && { label: 'Services', href: '/services' },
+  pages.blog && siteConfig.newsletter && { label: 'Blog', href: siteConfig.newsletter, external: true },
+  pages.contact && { label: 'Contact', href: '/contact' },
+].filter(Boolean) as { label: string; href: string; external?: boolean }[];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 glass" role="banner">
+  <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between" aria-label="Primary navigation">
+    <a href="/" class="flex items-center gap-3 group" aria-label={`${siteConfig.name} — Home`}>
+      <Logo />
+      <span class="font-heading font-bold text-lg text-white group-hover:text-[var(--color-accent)] transition-colors">
+        {siteConfig.name}
+      </span>
+    </a>
+
+    <!-- Desktop nav -->
+    <ul class="hidden md:flex items-center gap-8" role="list">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors py-2"
+            {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          >
+            {link.label}
+            {link.external && <span class="sr-only">(opens in new tab)</span>}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Mobile menu button -->
+    <button
+      class="md:hidden p-2 text-[var(--color-text-secondary)] hover:text-white transition-colors min-w-[48px] min-h-[48px] flex items-center justify-center"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+      id="mobile-menu-btn"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="6" x2="21" y2="6" class="menu-line-1" />
+        <line x1="3" y1="12" x2="21" y2="12" class="menu-line-2" />
+        <line x1="3" y1="18" x2="21" y2="18" class="menu-line-3" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile nav -->
+  <div id="mobile-menu" class="md:hidden hidden" role="dialog" aria-label="Mobile navigation">
+    <ul class="px-6 pb-6 space-y-1" role="list">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="block py-3 px-4 text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] hover:bg-white/5 rounded-lg transition-all min-h-[48px] flex items-center"
+            {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<!-- Spacer so content doesn't hide under fixed header -->
+<div class="h-[72px]" aria-hidden="true"></div>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  btn?.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    menu?.classList.toggle('hidden');
+  });
+</script>

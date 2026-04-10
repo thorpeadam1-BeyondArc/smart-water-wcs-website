@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import ArcMotif from '../components/ArcMotif.astro';
+import { siteConfig } from '../site.config';
+
+const { services, process, name } = siteConfig;
+---
+
+<BaseLayout
+  title={`Services — ${name}`}
+  description={`Explore what ${name} offers. ${siteConfig.tagline}`}
+>
+  <!-- ── Header ────────────────────────────────────────────── -->
+  <section class="section pt-24 md:pt-32">
+    <div class="accent-line reveal"></div>
+    <h1 class="section-heading reveal">Our Services</h1>
+    <p class="section-subline reveal">
+      What we bring to the table — and how we deliver it.
+    </p>
+  </section>
+
+  <!-- ── Service Cards ─────────────────────────────────────── -->
+  <section class="section pt-0">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {services.map((service, i) => (
+        <ServiceCard
+          title={service.title}
+          description={service.description}
+          icon={service.icon}
+          index={i}
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- ── How We Work ───────────────────────────────────────── -->
+  <section class="section">
+    <ArcMotif class="mb-8 reveal" />
+    <h2 class="section-heading reveal">How We Work</h2>
+    <p class="section-subline reveal">
+      A clear process from first conversation to final delivery.
+    </p>
+
+    <div class="grid sm:grid-cols-2 gap-6 mt-4">
+      {process.map((item, i) => (
+        <div class="glass-card p-8 reveal" style={`transition-delay: ${i * 0.1}s;`}>
+          <span class="text-[var(--color-accent)] font-heading font-bold text-sm tracking-wider mb-3 block">
+            {item.step}
+          </span>
+          <h3 class="font-heading font-bold text-xl text-white mb-3">{item.title}</h3>
+          <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed">{item.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ── Pricing note ──────────────────────────────────────── -->
+  <section class="section">
+    <div class="glass-surface p-12 text-center max-w-2xl mx-auto reveal">
+      <h2 class="font-heading font-bold text-2xl text-white mb-4">Pricing</h2>
+      <p class="text-[var(--color-text-secondary)] leading-relaxed mb-8">
+        Every project is different. We scope engagements individually to match your needs and budget.
+        Get in touch for a tailored proposal.
+      </p>
+      <a href="/contact" class="btn-primary">
+        Request a Quote
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

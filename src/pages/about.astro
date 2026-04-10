@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArcMotif from '../components/ArcMotif.astro';
+import { siteConfig } from '../site.config';
+
+const { about, name } = siteConfig;
+---
+
+<BaseLayout
+  title={`About — ${name}`}
+  description={`Learn about ${about.founderName} and the mission behind ${name}.`}
+>
+  <section class="section pt-24 md:pt-32">
+    <div class="accent-line reveal"></div>
+    <h1 class="section-heading reveal">About {name}</h1>
+    <p class="section-subline reveal">{siteConfig.tagline}</p>
+  </section>
+
+  <!-- ── Founder ───────────────────────────────────────────── -->
+  <section class="section pt-0">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <!-- Headshot placeholder -->
+      <div class="reveal">
+        <div class="glass-surface aspect-[3/4] max-w-sm mx-auto md:mx-0 flex items-center justify-center">
+          <div class="text-center p-8">
+            <div class="w-24 h-24 rounded-full bg-[var(--color-accent)]/20 border-2 border-[var(--color-accent)]/30 mx-auto mb-4 flex items-center justify-center">
+              <span class="text-3xl font-heading font-bold text-[var(--color-accent)]">
+                {about.founderName.charAt(0)}
+              </span>
+            </div>
+            <p class="text-sm text-[var(--color-text-secondary)]">
+              Replace with headshot<br/><code class="text-xs opacity-60">public/headshot.jpg</code>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bio -->
+      <div class="reveal" style="transition-delay: 0.15s;">
+        <h2 class="font-heading font-bold text-2xl text-white mb-1">{about.founderName}</h2>
+        <p class="text-[var(--color-accent)] font-medium mb-6">{about.founderRole}</p>
+        <p class="text-[var(--color-text-secondary)] leading-relaxed mb-6">{about.bio}</p>
+
+        <ArcMotif class="my-8 max-w-xs" />
+
+        <h3 class="font-heading font-semibold text-lg text-white mb-3">Philosophy</h3>
+        <p class="text-[var(--color-text-secondary)] leading-relaxed">{about.philosophy}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Values ────────────────────────────────────────────── -->
+  {about.values && about.values.length > 0 && (
+    <section class="section pt-0">
+      <div class="accent-line reveal"></div>
+      <h2 class="section-heading reveal">Our Values</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+        {about.values.map((value, i) => (
+          <div class="glass-card p-8 reveal" style={`transition-delay: ${i * 0.1}s;`}>
+            <h3 class="font-heading font-bold text-lg text-white mb-3">{value.title}</h3>
+            <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed">{value.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- ── CTA ───────────────────────────────────────────────── -->
+  <section class="section text-center reveal">
+    <h2 class="section-heading">Want to work together?</h2>
+    <p class="section-subline mx-auto mb-8">
+      We would love to hear about your project.
+    </p>
+    <a href="/contact" class="btn-primary">
+      Get in Touch
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </section>
+</BaseLayout>

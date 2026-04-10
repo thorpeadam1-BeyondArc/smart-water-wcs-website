@@ -1,0 +1,19 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  icon: string;
+  index?: number;
+}
+
+const { title, description, icon, index = 0 } = Astro.props;
+---
+
+<article
+  class="glass-card p-8 reveal"
+  style={`transition-delay: ${index * 0.1}s;`}
+>
+  <div class="text-4xl mb-4" aria-hidden="true">{icon}</div>
+  <h3 class="font-heading font-bold text-xl text-white mb-3">{title}</h3>
+  <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed">{description}</p>
+</article>
