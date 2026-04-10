@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://client.com/sitemap-index.xml
+Sitemap: https://smartwaterwcs.co.uk/sitemap-index.xml

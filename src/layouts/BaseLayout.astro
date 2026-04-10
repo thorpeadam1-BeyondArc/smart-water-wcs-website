@@ -2,7 +2,7 @@
 import { siteConfig } from '../site.config';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import StarField from '../components/StarField.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -21,16 +21,34 @@ const c = siteConfig.colors;
 const f = siteConfig.fonts;
 const canonicalURL = new URL(Astro.url.pathname, siteConfig.url);
 
-// JSON-LD structured data
+// JSON-LD structured data — LocalBusiness for local SEO
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: siteConfig.name,
+  '@type': 'LocalBusiness',
+  name: siteConfig.fullName,
   url: siteConfig.url,
   email: siteConfig.email,
+  telephone: siteConfig.phone,
   description: siteConfig.seo.defaultDescription,
-  ...(siteConfig.location && { address: { '@type': 'PostalAddress', addressLocality: siteConfig.location } }),
-  ...(siteConfig.linkedin && { sameAs: [siteConfig.linkedin, siteConfig.twitter, siteConfig.instagram].filter(Boolean) }),
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Doncaster',
+    addressRegion: 'South Yorkshire',
+    addressCountry: 'GB',
+  },
+  areaServed: siteConfig.serviceAreas.map(area => ({
+    '@type': 'City',
+    name: area,
+  })),
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5',
+    ratingCount: '69',
+    bestRating: '5',
+  },
+  priceRange: '£',
+  image: `${siteConfig.url}/logo.jpg`,
+  sameAs: [siteConfig.facebook].filter(Boolean),
 };
 ---
 
@@ -45,6 +63,8 @@ const jsonLd = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    <meta name="geo.region" content="GB-SYK" />
+    <meta name="geo.placename" content="Doncaster" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -52,6 +72,7 @@ const jsonLd = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(ogImage, siteConfig.url)} />
+    <meta property="og:locale" content="en_GB" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -66,7 +87,7 @@ const jsonLd = {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -84,26 +105,16 @@ const jsonLd = {
       'font-heading': f.heading,
       'font-body': f.body,
     }}>
-      :root {
-        --color-bg-primary: var(--color-bg-primary);
-        --color-bg-secondary: var(--color-bg-secondary);
-        --color-accent: var(--color-accent);
-        --color-accent-secondary: var(--color-accent-secondary);
-        --color-text-primary: var(--color-text-primary);
-        --color-text-secondary: var(--color-text-secondary);
-        --font-heading: var(--font-heading);
-        --font-body: var(--font-body);
-      }
     </style>
   </head>
-  <body class="min-h-screen relative">
+  <body class="min-h-screen relative bg-white">
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    <StarField />
     <Header />
     <main id="main-content">
       <slot />
     </main>
     <Footer />
+    <WhatsAppButton />
 
     <!-- Scroll reveal observer -->
     <script>

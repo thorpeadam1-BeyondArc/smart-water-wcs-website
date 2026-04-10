@@ -1,0 +1,70 @@
+---
+/**
+ * WaterDroplets — Subtle animated water droplet background effect.
+ * Lighter, service-appropriate alternative to StarField.
+ */
+---
+
+<div class="water-droplets" aria-hidden="true">
+  <div class="droplet droplet-1"></div>
+  <div class="droplet droplet-2"></div>
+  <div class="droplet droplet-3"></div>
+  <div class="droplet droplet-4"></div>
+  <div class="droplet droplet-5"></div>
+  <div class="droplet droplet-6"></div>
+  <div class="droplet droplet-7"></div>
+  <div class="droplet droplet-8"></div>
+</div>
+
+<style>
+  .water-droplets {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .droplet {
+    position: absolute;
+    width: 8px;
+    height: 12px;
+    background: rgba(58, 173, 224, 0.12);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: drop-fall linear infinite;
+  }
+
+  .droplet-1 { left: 10%; animation-duration: 8s; animation-delay: 0s; width: 6px; height: 10px; }
+  .droplet-2 { left: 25%; animation-duration: 10s; animation-delay: 1.5s; width: 8px; height: 12px; }
+  .droplet-3 { left: 40%; animation-duration: 7s; animation-delay: 3s; width: 5px; height: 8px; }
+  .droplet-4 { left: 55%; animation-duration: 9s; animation-delay: 0.5s; width: 7px; height: 11px; }
+  .droplet-5 { left: 70%; animation-duration: 11s; animation-delay: 2s; width: 6px; height: 9px; }
+  .droplet-6 { left: 85%; animation-duration: 8.5s; animation-delay: 4s; width: 8px; height: 12px; }
+  .droplet-7 { left: 15%; animation-duration: 12s; animation-delay: 5.5s; width: 4px; height: 7px; }
+  .droplet-8 { left: 60%; animation-duration: 9.5s; animation-delay: 3.5s; width: 5px; height: 8px; }
+
+  @keyframes drop-fall {
+    0% {
+      top: -5%;
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.6;
+    }
+    90% {
+      opacity: 0.6;
+    }
+    100% {
+      top: 105%;
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .droplet {
+      animation: none;
+      opacity: 0.15;
+      top: 50%;
+    }
+  }
+</style>

@@ -1,73 +1,127 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ServiceCard from '../components/ServiceCard.astro';
-import ArcMotif from '../components/ArcMotif.astro';
 import { siteConfig } from '../site.config';
-
-const { services, process, name } = siteConfig;
 ---
 
 <BaseLayout
-  title={`Services — ${name}`}
-  description={`Explore what ${name} offers. ${siteConfig.tagline}`}
+  title="Services & Prices | Smart Water Window Cleaning Doncaster"
+  description="Window cleaning from £13, gutter cleaning from £70, fascia & soffit cleaning from £80, conservatory roof cleaning from £80. Covering Doncaster, Warmsworth, Edlington, Balby & surrounding areas."
 >
-  <!-- ── Header ────────────────────────────────────────────── -->
-  <section class="section pt-24 md:pt-32">
-    <div class="accent-line reveal"></div>
-    <h1 class="section-heading reveal">Our Services</h1>
-    <p class="section-subline reveal">
-      What we bring to the table — and how we deliver it.
-    </p>
-  </section>
-
-  <!-- ── Service Cards ─────────────────────────────────────── -->
-  <section class="section pt-0">
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {services.map((service, i) => (
-        <ServiceCard
-          title={service.title}
-          description={service.description}
-          icon={service.icon}
-          index={i}
-        />
-      ))}
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <section class="bg-gradient-to-br from-[var(--color-accent-secondary)] to-[#1e4a80] text-white py-16 md:py-20">
+    <div class="section py-0">
+      <div class="max-w-3xl">
+        <div class="accent-line" style="background: linear-gradient(90deg, #3AADE0, #ffffff);"></div>
+        <h1 class="text-4xl sm:text-5xl font-heading font-extrabold text-white mb-4 animate-fade-in">
+          Services & Prices
+        </h1>
+        <p class="text-lg text-blue-100 leading-relaxed animate-fade-in-up" style="animation-delay: 0.2s;">
+          All prices up front, no hidden extras. Frames, sills and doors always included with window cleans.
+        </p>
+      </div>
     </div>
   </section>
 
-  <!-- ── How We Work ───────────────────────────────────────── -->
+  <!-- ── Services Grid ──────────────────────────────────────── -->
   <section class="section">
-    <ArcMotif class="mb-8 reveal" />
-    <h2 class="section-heading reveal">How We Work</h2>
-    <p class="section-subline reveal">
-      A clear process from first conversation to final delivery.
-    </p>
+    <div class="grid sm:grid-cols-2 gap-8">
+      {siteConfig.services.map((service, i) => (
+        <article class="card p-8 reveal" style={`transition-delay: ${i * 0.1}s;`}>
+          <div class="flex items-start gap-4">
+            <div class="text-4xl flex-shrink-0" aria-hidden="true">{service.icon}</div>
+            <div class="flex-1">
+              <h2 class="font-heading font-bold text-xl text-[var(--color-accent-secondary)] mb-3">{service.title}</h2>
+              <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4">{service.description}</p>
+              <div class="inline-flex items-center gap-2 bg-[var(--color-bg-secondary)] px-4 py-2 rounded-full">
+                <span class="text-xl font-heading font-bold text-[var(--color-accent)]">{service.price}</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
 
-    <div class="grid sm:grid-cols-2 gap-6 mt-4">
-      {process.map((item, i) => (
-        <div class="glass-card p-8 reveal" style={`transition-delay: ${i * 0.1}s;`}>
-          <span class="text-[var(--color-accent)] font-heading font-bold text-sm tracking-wider mb-3 block">
-            {item.step}
-          </span>
-          <h3 class="font-heading font-bold text-xl text-white mb-3">{item.title}</h3>
-          <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed">{item.description}</p>
+    <!-- Multi-service discount -->
+    <div class="bg-[var(--color-bg-secondary)] rounded-2xl p-8 mt-10 text-center reveal border border-gray-100">
+      <div class="text-3xl mb-3" aria-hidden="true">💰</div>
+      <h3 class="font-heading font-bold text-xl text-[var(--color-accent-secondary)] mb-2">
+        Save With Multiple Services
+      </h3>
+      <p class="text-[var(--color-text-secondary)] max-w-lg mx-auto mb-4">
+        Booking more than one service? Ash offers discounts when you combine services — like windows plus gutters, or a full exterior clean. Just ask for a package price.
+      </p>
+      <a href={`https://wa.me/${siteConfig.whatsapp}`} target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Ask About Package Prices
+      </a>
+    </div>
+  </section>
+
+  <!-- ── What's Included ────────────────────────────────────── -->
+  <section class="bg-[var(--color-bg-secondary)] py-20">
+    <div class="section py-0">
+      <div class="text-center mb-12">
+        <div class="accent-line mx-auto reveal"></div>
+        <h2 class="section-heading reveal">What's Included</h2>
+        <p class="section-subline mx-auto reveal">
+          No nasty surprises. Here's what you get as standard.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[
+          { icon: '🪟', title: 'Frames, Sills & Doors', desc: 'All included in every window clean. No extras to pay.' },
+          { icon: '💧', title: 'Water-Fed Pole System', desc: 'Professional pure water system for streak-free results when dry.' },
+          { icon: '📱', title: 'Text Reminders', desc: 'A text the night before so you always know when to expect us.' },
+          { icon: '🌿', title: 'No Harsh Chemicals', desc: 'Pure water cleaning that\'s safe for your home and the environment.' },
+          { icon: '💬', title: 'Free Quotes', desc: 'Every quote is free, honest, and with no obligation.' },
+          { icon: '📅', title: 'Regular Schedules', desc: 'Set up a regular clean and never think about it again.' },
+        ].map((item, i) => (
+          <div class="bg-white rounded-xl p-6 reveal border border-gray-100" style={`transition-delay: ${i * 0.1}s;`}>
+            <div class="text-2xl mb-3" aria-hidden="true">{item.icon}</div>
+            <h3 class="font-heading font-bold text-[var(--color-accent-secondary)] mb-2">{item.title}</h3>
+            <p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── How We Work ────────────────────────────────────────── -->
+  <section class="section">
+    <div class="text-center mb-12">
+      <div class="accent-line mx-auto reveal"></div>
+      <h2 class="section-heading reveal">How It Works</h2>
+      <p class="section-subline mx-auto reveal">
+        Four simple steps from first message to sparkling windows.
+      </p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      {siteConfig.process.map((step, i) => (
+        <div class="text-center reveal" style={`transition-delay: ${i * 0.1}s;`}>
+          <div class="w-14 h-14 rounded-full bg-[var(--color-accent)] text-white flex items-center justify-center font-heading font-bold text-lg mx-auto mb-4">
+            {step.step}
+          </div>
+          <h3 class="font-heading font-bold text-lg text-[var(--color-accent-secondary)] mb-2">{step.title}</h3>
+          <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed">{step.description}</p>
         </div>
       ))}
     </div>
   </section>
 
-  <!-- ── Pricing note ──────────────────────────────────────── -->
-  <section class="section">
-    <div class="glass-surface p-12 text-center max-w-2xl mx-auto reveal">
-      <h2 class="font-heading font-bold text-2xl text-white mb-4">Pricing</h2>
-      <p class="text-[var(--color-text-secondary)] leading-relaxed mb-8">
-        Every project is different. We scope engagements individually to match your needs and budget.
-        Get in touch for a tailored proposal.
+  <!-- ── CTA ────────────────────────────────────────────────── -->
+  <section class="bg-gradient-to-br from-[var(--color-accent-secondary)] to-[#1e4a80] text-white py-16">
+    <div class="section py-0 text-center reveal">
+      <h2 class="text-3xl font-heading font-bold text-white mb-4">Want a Free Quote?</h2>
+      <p class="text-blue-100 mb-8 max-w-lg mx-auto">
+        WhatsApp is the quickest way to get a price. Drop Ash a message with your postcode and what you need doing.
       </p>
-      <a href="/contact" class="btn-primary">
-        Request a Quote
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
+      <a href={`https://wa.me/${siteConfig.whatsapp}`} target="_blank" rel="noopener noreferrer" class="btn-whatsapp text-base">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
         </svg>
+        Get a Free Quote on WhatsApp
       </a>
     </div>
   </section>

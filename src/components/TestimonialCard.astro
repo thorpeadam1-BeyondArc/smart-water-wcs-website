@@ -1,0 +1,31 @@
+---
+interface Props {
+  quote: string;
+  name: string;
+  index?: number;
+}
+
+const { quote, name, index = 0 } = Astro.props;
+---
+
+<article
+  class="card p-6 reveal relative"
+  style={`transition-delay: ${index * 0.1}s;`}
+>
+  <!-- Stars -->
+  <div class="flex gap-1 mb-4" aria-label="5 star review">
+    {Array.from({ length: 5 }).map(() => (
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true">
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+      </svg>
+    ))}
+  </div>
+
+  <blockquote class="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4 italic">
+    &ldquo;{quote}&rdquo;
+  </blockquote>
+
+  <footer class="font-heading font-semibold text-sm text-[var(--color-accent-secondary)]">
+    &mdash; {name}
+  </footer>
+</article>

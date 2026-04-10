@@ -1,99 +1,253 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ServiceCard from '../components/ServiceCard.astro';
-import NewsletterCTA from '../components/NewsletterCTA.astro';
-import ArcMotif from '../components/ArcMotif.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import WaterDroplets from '../components/WaterDroplets.astro';
 import { siteConfig } from '../site.config';
 
-const { hero, services, credibility } = siteConfig;
+const { hero, services, credibility, testimonials } = siteConfig;
 ---
 
 <BaseLayout
-  title={`${siteConfig.name} — ${siteConfig.tagline}`}
+  title={`${siteConfig.fullName} | Window Cleaner Doncaster`}
   description={siteConfig.seo.defaultDescription}
 >
   <!-- ── Hero ──────────────────────────────────────────────── -->
-  <section class="section relative pt-24 pb-16 md:pt-32 md:pb-24">
-    <div class="max-w-3xl">
-      <div class="accent-line"></div>
-      <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold leading-[1.08] mb-6 animate-fade-in">
-        {hero.headline}
-      </h1>
-      <p class="text-lg sm:text-xl text-[var(--color-text-secondary)] leading-relaxed mb-10 max-w-2xl animate-fade-in-up" style="animation-delay: 0.2s;">
-        {hero.subline}
-      </p>
-      <div class="flex flex-wrap gap-4 animate-fade-in-up" style="animation-delay: 0.4s;">
-        <a href={hero.cta.href} class="btn-primary">
-          {hero.cta.text}
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-        <a href={hero.secondaryCta.href} class="btn-secondary">
-          {hero.secondaryCta.text}
-        </a>
+  <section class="relative bg-gradient-to-br from-[var(--color-accent-secondary)] via-[#1e4a80] to-[var(--color-accent-secondary)] text-white overflow-hidden">
+    <WaterDroplets />
+    <div class="section relative z-10 pt-20 pb-16 md:pt-28 md:pb-24">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-6 animate-fade-in">
+          <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+          Still taking on new customers
+        </div>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-heading font-extrabold leading-[1.08] mb-6 animate-fade-in text-white">
+          {hero.headline}
+        </h1>
+        <p class="text-lg sm:text-xl text-blue-100 leading-relaxed mb-10 max-w-2xl animate-fade-in-up" style="animation-delay: 0.2s;">
+          {hero.subline}
+        </p>
+        <div class="flex flex-wrap gap-4 animate-fade-in-up" style="animation-delay: 0.4s;">
+          <a href={hero.cta.href} target="_blank" rel="noopener noreferrer" class="btn-whatsapp text-base">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            {hero.cta.text}
+          </a>
+          <a href={hero.secondaryCta.href} class="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm text-white font-heading font-semibold rounded-lg border border-white/20 hover:bg-white/20 transition-all min-h-[48px]">
+            {hero.secondaryCta.text}
+          </a>
+        </div>
+      </div>
+
+      <!-- Decorative water droplet icon -->
+      <div class="absolute right-8 bottom-8 opacity-10 hidden lg:block">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/>
+        </svg>
       </div>
     </div>
 
-    <!-- Decorative arc -->
-    <div class="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 hidden lg:block">
-      <ArcMotif />
+    <!-- Wave divider -->
+    <div class="absolute bottom-0 left-0 right-0">
+      <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full" preserveAspectRatio="none">
+        <path d="M0 40C240 80 480 0 720 40C960 80 1200 0 1440 40V80H0V40Z" fill="white"/>
+      </svg>
     </div>
   </section>
 
-  <!-- ── Services ──────────────────────────────────────────── -->
-  <section class="section pt-8">
-    <div class="accent-line reveal"></div>
-    <h2 class="section-heading reveal">What We Do</h2>
-    <p class="section-subline reveal">
-      Core capabilities that drive results.
-    </p>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {services.map((service, i) => (
-        <ServiceCard
-          title={service.title}
-          description={service.description}
-          icon={service.icon}
-          index={i}
-        />
-      ))}
-    </div>
-  </section>
-
-  <!-- ── Credibility ───────────────────────────────────────── -->
-  <section class="section">
-    <div class="glass-surface p-12 reveal">
-      <h2 class="text-center font-heading font-bold text-2xl mb-10 text-white">
-        {credibility.heading}
-      </h2>
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-8 text-center">
+  <!-- ── Stats Bar ──────────────────────────────────────────── -->
+  <section class="section pt-12 pb-8">
+    <div class="bg-[var(--color-bg-secondary)] rounded-2xl p-8 md:p-10 reveal">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
         {credibility.stats.map((stat) => (
           <div>
-            <div class="text-3xl sm:text-4xl font-heading font-bold gradient-text mb-2">
+            <div class="text-3xl sm:text-4xl font-heading font-extrabold gradient-text mb-1">
               {stat.value}
             </div>
-            <div class="text-sm text-[var(--color-text-secondary)]">{stat.label}</div>
+            <div class="text-sm text-[var(--color-text-secondary)] font-medium">{stat.label}</div>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ── Newsletter CTA ────────────────────────────────────── -->
-  <NewsletterCTA />
+  <!-- ── Services ──────────────────────────────────────────── -->
+  <section class="section pt-8 pb-12">
+    <div class="text-center mb-12">
+      <div class="accent-line mx-auto reveal"></div>
+      <h2 class="section-heading reveal">What We Do</h2>
+      <p class="section-subline mx-auto reveal">
+        Professional exterior cleaning services at honest prices. No hidden extras.
+      </p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {services.map((service, i) => (
+        <ServiceCard
+          title={service.title}
+          description={service.description}
+          icon={service.icon}
+          price={service.price}
+          index={i}
+        />
+      ))}
+    </div>
+    <div class="text-center mt-10 reveal">
+      <p class="text-[var(--color-text-secondary)] mb-4">Discounts available when you book multiple services</p>
+      <a href="/services" class="btn-secondary">
+        See All Services & Prices
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ── How It Works ──────────────────────────────────────── -->
+  <section class="bg-[var(--color-bg-secondary)] py-20">
+    <div class="section py-0">
+      <div class="text-center mb-12">
+        <div class="accent-line mx-auto reveal"></div>
+        <h2 class="section-heading reveal">How It Works</h2>
+        <p class="section-subline mx-auto reveal">
+          Getting your windows cleaned couldn't be easier.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {siteConfig.process.map((step, i) => (
+          <div class="text-center reveal" style={`transition-delay: ${i * 0.1}s;`}>
+            <div class="w-14 h-14 rounded-full bg-[var(--color-accent)] text-white flex items-center justify-center font-heading font-bold text-lg mx-auto mb-4">
+              {step.step}
+            </div>
+            <h3 class="font-heading font-bold text-lg text-[var(--color-accent-secondary)] mb-2">{step.title}</h3>
+            <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed">{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Text Reminder Feature ─────────────────────────────── -->
+  <section class="section">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="reveal">
+        <div class="accent-line"></div>
+        <h2 class="section-heading">You'll Always Know When We're Coming</h2>
+        <p class="text-[var(--color-text-secondary)] text-lg leading-relaxed mb-6">
+          Ash sends a text reminder the night before every clean. No more wondering if the window cleaner's going to turn up — you'll always be in the loop.
+        </p>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-[var(--color-accent)] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span class="text-[var(--color-text-secondary)]">Text reminder the night before every clean</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-[var(--color-accent)] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span class="text-[var(--color-text-secondary)]">Easy to reschedule via WhatsApp</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-[var(--color-accent)] mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+            <span class="text-[var(--color-text-secondary)]">Regular schedules so you don't have to think about it</span>
+          </li>
+        </ul>
+      </div>
+      <div class="reveal" style="transition-delay: 0.2s;">
+        <!-- Phone mockup -->
+        <div class="bg-[var(--color-bg-secondary)] rounded-3xl p-8 max-w-sm mx-auto">
+          <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+            <div class="flex items-center gap-3 mb-4 pb-3 border-b border-gray-100">
+              <div class="w-10 h-10 rounded-full bg-[var(--color-accent)] flex items-center justify-center text-white font-bold text-sm">SW</div>
+              <div>
+                <div class="font-heading font-bold text-sm text-[var(--color-accent-secondary)]">Smart Water</div>
+                <div class="text-xs text-gray-400">Text message</div>
+              </div>
+            </div>
+            <div class="bg-[var(--color-bg-secondary)] rounded-xl p-4">
+              <p class="text-sm text-[var(--color-text-primary)] leading-relaxed">
+                Hi! Just a reminder your window clean is booked for tomorrow morning. If you need to move it, just drop me a text. Cheers, Ash
+              </p>
+              <p class="text-xs text-gray-400 mt-2 text-right">7:42 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Testimonials ──────────────────────────────────────── -->
+  <section class="bg-[var(--color-bg-secondary)] py-20">
+    <div class="section py-0">
+      <div class="text-center mb-12">
+        <div class="accent-line mx-auto reveal"></div>
+        <h2 class="section-heading reveal">What Customers Say</h2>
+        <p class="section-subline mx-auto reveal">
+          69 five-star reviews on Facebook. 100% recommendation rate.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {testimonials.map((t, i) => (
+          <TestimonialCard
+            quote={t.quote}
+            name={t.name}
+            index={i}
+          />
+        ))}
+      </div>
+      <div class="text-center mt-10 reveal">
+        <a
+          href={siteConfig.facebook}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-secondary"
+        >
+          See All Reviews on Facebook
+          <span class="sr-only">(opens in new tab)</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Service Areas ─────────────────────────────────────── -->
+  <section class="section">
+    <div class="text-center reveal">
+      <div class="accent-line mx-auto"></div>
+      <h2 class="section-heading">Covering Doncaster & Surrounding Areas</h2>
+      <p class="section-subline mx-auto">
+        Professional window and exterior cleaning across South Yorkshire.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3 mt-8">
+        {siteConfig.serviceAreas.map((area) => (
+          <span class="bg-[var(--color-bg-secondary)] px-5 py-2.5 rounded-full text-sm font-medium text-[var(--color-accent-secondary)] border border-gray-100">
+            {area}
+          </span>
+        ))}
+        <span class="bg-[var(--color-bg-secondary)] px-5 py-2.5 rounded-full text-sm font-medium text-[var(--color-text-secondary)] border border-gray-100">
+          & surrounding areas
+        </span>
+      </div>
+    </div>
+  </section>
 
   <!-- ── Contact CTA ───────────────────────────────────────── -->
-  <section class="section text-center reveal">
-    <ArcMotif class="mx-auto mb-8" />
-    <h2 class="section-heading">Ready to get started?</h2>
-    <p class="section-subline mx-auto">
-      Let&rsquo;s have a conversation about how we can help.
-    </p>
-    <a href="/contact" class="btn-primary">
-      Get in Touch
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M5 12h14M12 5l7 7-7 7"/>
-      </svg>
-    </a>
+  <section class="bg-gradient-to-br from-[var(--color-accent-secondary)] to-[#1e4a80] text-white py-20 relative overflow-hidden">
+    <WaterDroplets />
+    <div class="section py-0 text-center relative z-10 reveal">
+      <h2 class="text-3xl sm:text-4xl font-heading font-bold text-white mb-4">Ready for Sparkling Windows?</h2>
+      <p class="text-blue-100 text-lg mb-8 max-w-xl mx-auto">
+        Drop Ash a message for a free, no-obligation quote. Most people hear back within a couple of hours.
+      </p>
+      <a href={`https://wa.me/${siteConfig.whatsapp}`} target="_blank" rel="noopener noreferrer" class="btn-whatsapp text-base">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Get a Free Quote on WhatsApp
+      </a>
+    </div>
   </section>
 </BaseLayout>

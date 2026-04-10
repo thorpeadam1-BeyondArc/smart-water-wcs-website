@@ -3,17 +3,30 @@ interface Props {
   title: string;
   description: string;
   icon: string;
+  price?: string;
   index?: number;
 }
 
-const { title, description, icon, index = 0 } = Astro.props;
+const { title, description, icon, price, index = 0 } = Astro.props;
 ---
 
 <article
-  class="glass-card p-8 reveal"
+  class="card p-8 reveal group relative overflow-hidden"
   style={`transition-delay: ${index * 0.1}s;`}
 >
-  <div class="text-4xl mb-4" aria-hidden="true">{icon}</div>
-  <h3 class="font-heading font-bold text-xl text-white mb-3">{title}</h3>
-  <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed">{description}</p>
+  <!-- Shimmer effect on hover -->
+  <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+    style="background: linear-gradient(90deg, transparent, rgba(58, 173, 224, 0.05), transparent); background-size: 200% 100%; animation: shimmer 3s linear infinite;">
+  </div>
+
+  <div class="relative z-10">
+    <div class="text-4xl mb-4 animate-float-gentle" aria-hidden="true" style={`animation-delay: ${index * 0.3}s;`}>{icon}</div>
+    <h3 class="font-heading font-bold text-xl text-[var(--color-accent-secondary)] mb-3">{title}</h3>
+    <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-4">{description}</p>
+    {price && (
+      <div class="inline-flex items-center gap-2 bg-[var(--color-bg-secondary)] px-4 py-2 rounded-full">
+        <span class="text-lg font-heading font-bold text-[var(--color-accent)]">{price}</span>
+      </div>
+    )}
+  </div>
 </article>

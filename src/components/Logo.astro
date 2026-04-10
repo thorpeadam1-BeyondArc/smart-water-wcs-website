@@ -1,31 +1,14 @@
 ---
-/**
- * Logo component
- * Drop your client logo at public/logo.png (or .svg)
- * Falls back to an accent-coloured circle with the first initial.
- */
 import { siteConfig } from '../site.config';
-
-const initial = siteConfig.name.charAt(0).toUpperCase();
 ---
 
-<div class="relative w-9 h-9 flex-shrink-0">
-  <!-- Try to load logo.png; if it doesn't exist the img will fail silently -->
+<div class="relative flex-shrink-0">
   <img
-    src="/logo.png"
-    alt={`${siteConfig.name} logo`}
-    width="36"
-    height="36"
-    class="w-9 h-9 object-contain rounded-lg logo-img"
+    src="/logo.jpg"
+    alt={`${siteConfig.fullName} logo`}
+    width="140"
+    height="40"
+    class="h-10 w-auto object-contain"
     loading="eager"
-    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
   />
-  <!-- Fallback: initial in accent circle -->
-  <div
-    class="w-9 h-9 rounded-lg flex items-center justify-center font-heading font-bold text-sm logo-fallback"
-    style={`display:none; background: var(--color-accent); color: var(--color-bg-primary);`}
-    aria-hidden="true"
-  >
-    {initial}
-  </div>
 </div>
