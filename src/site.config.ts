@@ -134,7 +134,7 @@ export const siteConfig = {
   ],
 
   // ── Service Areas ─────────────────────────────────────────
-  serviceAreas: ['Warmsworth', 'Edlington', 'Balby', 'Cusworth', 'Scawsby', 'Doncaster'],
+  serviceAreas: ['Warmsworth', 'Edlington', 'Balby', 'Cusworth', 'Scawsby', 'Sprotbrough', 'Bessacarr', 'Cantley', 'Tickhill', 'Rossington', 'Doncaster'],
   servicePostcodes: ['DN4', 'DN5', 'DN11', 'DN12'],
   yearsTrading: '4.5',
   insurance: 'Public liability insured',
