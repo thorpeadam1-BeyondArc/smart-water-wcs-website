@@ -92,7 +92,10 @@ import { siteConfig } from '../site.config';
             <div>
               <h3 class="font-heading font-semibold text-sm text-[var(--color-accent-secondary)]">Covering</h3>
               <p class="text-[var(--color-text-secondary)] text-sm">
-                {siteConfig.serviceAreas.join(', ')} & surrounding areas
+                {siteConfig.serviceAreas.join(', ')}
+              </p>
+              <p class="text-[var(--color-text-secondary)] text-xs mt-1">
+                Postcodes: {siteConfig.servicePostcodes.join(', ')}
               </p>
             </div>
           </div>

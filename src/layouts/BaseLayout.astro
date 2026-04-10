@@ -36,10 +36,18 @@ const jsonLd = {
     addressRegion: 'South Yorkshire',
     addressCountry: 'GB',
   },
-  areaServed: siteConfig.serviceAreas.map(area => ({
-    '@type': 'City',
-    name: area,
-  })),
+  areaServed: [
+    ...siteConfig.serviceAreas.map(area => ({
+      '@type': 'City',
+      name: area,
+    })),
+    ...siteConfig.servicePostcodes.map(pc => ({
+      '@type': 'PostalAddress',
+      postalCode: pc,
+      addressCountry: 'GB',
+    })),
+  ],
+  foundingDate: '2022',
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: '5',

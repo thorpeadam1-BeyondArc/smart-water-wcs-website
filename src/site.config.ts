@@ -96,12 +96,12 @@ export const siteConfig = {
   about: {
     founderName: 'Ash',
     founderRole: 'Founder & Operator',
-    bio: 'Ash started Smart Water to do one thing well: give people in Doncaster a window cleaner they can actually rely on. No missed appointments, no surprise charges, no chasing people up. Just a proper job, on time, every time.\n\nWith 350+ regular customers and 69 five-star reviews, the work speaks for itself. From a single set of windows to a full exterior clean — gutters, fascias, soffits, conservatory roofs — Ash does it all personally, so the standard never drops.',
+    bio: 'Before Smart Water, Ash spent years in construction driving articulated dump trucks. When a friend told him about window cleaning, he gave it a go — and never looked back.\n\nFour and a half years later, Ash has built Smart Water into one of the most trusted cleaning services in Doncaster. With 350+ regular customers and 69 five-star reviews, the work speaks for itself. From a single set of windows to a full exterior clean — gutters, fascias, soffits, conservatory roofs — Ash does it all personally, so the standard never drops.',
     philosophy: 'Smart Water runs on a simple idea: treat every house like it\'s your own. That means turning up when you say you will, texting the night before so customers know you\'re coming, and doing a proper job from start to finish.',
     values: [
       { title: 'Reliable', description: 'You\'ll get a text reminder the night before every clean. No guessing, no missed appointments.' },
       { title: 'Honest Pricing', description: 'All prices are upfront. No hidden extras — frames, sills and doors are always included.' },
-      { title: 'Proper Job', description: 'Professional water-fed pole system for streak-free results every time.' },
+      { title: 'Fully Insured', description: 'Public liability insurance for complete peace of mind on every job.' },
     ],
   },
 
@@ -135,11 +135,15 @@ export const siteConfig = {
 
   // ── Service Areas ─────────────────────────────────────────
   serviceAreas: ['Warmsworth', 'Edlington', 'Balby', 'Cusworth', 'Scawsby', 'Doncaster'],
+  servicePostcodes: ['DN4', 'DN5', 'DN11', 'DN12'],
+  yearsTrading: '4.5',
+  insurance: 'Public liability insured',
 
   // ── Credibility / social proof ────────────────────────────
   credibility: {
     heading: 'Trusted Across Doncaster',
     stats: [
+      { value: '4.5+', label: 'Years trading' },
       { value: '350+', label: 'Regular customers' },
       { value: '69', label: 'Five-star reviews' },
       { value: '100%', label: 'Recommendation rate' },

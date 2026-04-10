@@ -59,7 +59,7 @@ const { hero, services, credibility, testimonials } = siteConfig;
   <!-- ── Stats Bar ──────────────────────────────────────────── -->
   <section class="section pt-12 pb-8">
     <div class="bg-[var(--color-bg-secondary)] rounded-2xl p-8 md:p-10 reveal">
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 text-center">
         {credibility.stats.map((stat) => (
           <div>
             <div class="text-3xl sm:text-4xl font-heading font-extrabold gradient-text mb-1">
@@ -227,10 +227,10 @@ const { hero, services, credibility, testimonials } = siteConfig;
             {area}
           </span>
         ))}
-        <span class="bg-[var(--color-bg-secondary)] px-5 py-2.5 rounded-full text-sm font-medium text-[var(--color-text-secondary)] border border-gray-100">
-          & surrounding areas
-        </span>
       </div>
+      <p class="text-sm text-[var(--color-text-secondary)] mt-6">
+        Postcodes covered: <strong class="text-[var(--color-accent-secondary)]">{siteConfig.servicePostcodes.join(', ')}</strong>
+      </p>
     </div>
   </section>
 
