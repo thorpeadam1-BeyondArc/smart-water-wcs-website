@@ -50,8 +50,8 @@ export const siteConfig = {
 
   // ── Hero ──────────────────────────────────────────────────
   hero: {
-    headline: 'Sparkling Clean Windows & Gutters in Doncaster',
-    subline: 'Trusted by 350+ regular customers. Window cleaning, gutter clearing, fascia & soffit cleaning, and conservatory roofs — all done properly, at honest prices.',
+    headline: "Doncaster's Most Recommended Window Cleaning Service",
+    subline: 'Window cleaning, gutter clearing, fascia & soffit cleaning, and conservatory roofs — done properly, priced honestly. Trusted by 350+ regular customers.',
     cta: { text: 'Get a Free Quote', href: 'https://wa.me/447542472139' },
     secondaryCta: { text: 'View Services & Prices', href: '/services' },
   },
