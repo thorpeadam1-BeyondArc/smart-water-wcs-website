@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import { siteConfig } from '../site.config';
+---
+
+<BaseLayout
+  title="Get a Quote | Smart Water Window Cleaning Doncaster"
+  description="Get an instant window cleaning estimate for your property in Doncaster. Fill in your details and get a price range in seconds."
+>
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <section class="bg-gradient-to-br from-[var(--color-accent-secondary)] to-[#1e4a80] text-white py-16 md:py-20">
+    <div class="section py-0">
+      <div class="max-w-3xl">
+        <div class="accent-line" style="background: linear-gradient(90deg, #3AADE0, #ffffff);"></div>
+        <h1 class="text-4xl sm:text-5xl font-heading font-extrabold text-white mb-4 animate-fade-in">
+          Get an Instant Estimate
+        </h1>
+        <p class="text-lg text-blue-100 leading-relaxed animate-fade-in-up" style="animation-delay: 0.2s;">
+          Tell us about your property and get an estimated price range in seconds. {siteConfig.founder} will follow up within 24 hours to confirm your exact quote.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Quote Form ─────────────────────────────────────────── -->
+  <section class="section">
+    <QuoteForm />
+  </section>
+
+  <!-- ── Trust signals ──────────────────────────────────────── -->
+  <section class="section" style={`background: ${siteConfig.colors.bgSecondary}`}>
+    <div class="max-w-2xl mx-auto text-center py-8">
+      <p class="text-sm" style={`color: ${siteConfig.colors.textSecondary}`}>
+        This is an estimate only — your final price may vary depending on access, condition, and any extras.
+        {siteConfig.founder} will visit or call to confirm before any work starts.
+        No obligation. No pressure.
+      </p>
+      <div class="flex justify-center gap-8 mt-6 text-sm font-medium" style={`color: ${siteConfig.colors.textPrimary}`}>
+        <span>✅ {siteConfig.credibility.customers} customers</span>
+        <span>⭐ {siteConfig.credibility.reviews} reviews</span>
+        <span>🛡️ Fully insured</span>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

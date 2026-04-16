@@ -1,0 +1,332 @@
+---
+/**
+ * QuoteForm — multi-step quote request form.
+ * POSTs to arc-ops-agent Workers API.
+ * Shows estimated price range on submission.
+ * Captures preferred comms channel + payment method + opt-in.
+ */
+import { siteConfig } from '../site.config';
+
+const API_URL = import.meta.env.PUBLIC_API_URL || 'https://arc-ops-agent.beyondarc.workers.dev';
+const TENANT_ID = import.meta.env.PUBLIC_TENANT_ID || 'smart-water-wcs';
+---
+
+<section class="w-full max-w-2xl mx-auto px-4 py-8">
+  <div id="quote-form-container">
+    <form id="quote-form" class="space-y-6">
+      <!-- Step 1: About you -->
+      <div id="step-1" class="step">
+        <h3 class="text-xl font-bold mb-4" style={`color: ${siteConfig.colors.accent}`}>About you</h3>
+
+        <div class="space-y-4">
+          <div>
+            <label for="name" class="block text-sm font-medium mb-1">Full name *</label>
+            <input type="text" id="name" name="name" required
+              class="form-input" placeholder="e.g. John Smith" />
+          </div>
+
+          <div>
+            <label for="address" class="block text-sm font-medium mb-1">Address *</label>
+            <textarea id="address" name="address" required rows="2"
+              class="form-input" placeholder="e.g. 14 Acacia Avenue, Sprotbrough"></textarea>
+          </div>
+
+          <div>
+            <label for="postcode" class="block text-sm font-medium mb-1">Postcode *</label>
+            <input type="text" id="postcode" name="postcode" required
+              class="form-input" placeholder="e.g. DN5 7CD"
+              pattern="[A-Za-z]{1,2}\d[A-Za-z\d]?\s*\d[A-Za-z]{2}" title="Enter a valid UK postcode" />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="phone" class="block text-sm font-medium mb-1">Phone number *</label>
+              <input type="tel" id="phone" name="phone" required
+                class="form-input" placeholder="e.g. 07542 472139" />
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-medium mb-1">Email</label>
+              <input type="email" id="email" name="email"
+                class="form-input" placeholder="e.g. john@example.com" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">How would you prefer us to send reminders?</label>
+            <select id="preferred_contact" name="preferred_contact" class="form-input">
+              <option value="whatsapp">WhatsApp</option>
+              <option value="sms">Text message (SMS)</option>
+              <option value="email">Email</option>
+              <option value="manual">Phone call — don't automate, contact me personally</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">Preferred payment method</label>
+            <select id="payment_method" name="payment_method" class="form-input">
+              <option value="standing_order">Bank transfer / standing order</option>
+              <option value="gocardless">Direct Debit</option>
+              <option value="cash">Cash</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">Is this for a home or a business?</label>
+            <select id="is_commercial" name="is_commercial" class="form-input">
+              <option value="false">Home (domestic)</option>
+              <option value="true">Business (commercial)</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="button" onclick="showStep(2)" class="btn-next mt-6">Next — Property details →</button>
+      </div>
+
+      <!-- Step 2: Property details -->
+      <div id="step-2" class="step hidden">
+        <h3 class="text-xl font-bold mb-4" style={`color: ${siteConfig.colors.accent}`}>About the property</h3>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium mb-1">Property type *</label>
+            <select id="property_type" name="property_type" required class="form-input">
+              <option value="">Select...</option>
+              <option value="terraced">Terraced</option>
+              <option value="semi">Semi-detached</option>
+              <option value="detached">Detached</option>
+              <option value="bungalow">Bungalow</option>
+              <option value="flat">Flat</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">How many floors?</label>
+            <select id="floors" name="floors" class="form-input">
+              <option value="1">1</option>
+              <option value="2" selected>2</option>
+              <option value="3">3+</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">Roughly how many windows?</label>
+            <select id="num_windows" name="num_windows" class="form-input">
+              <option value="3">1–5</option>
+              <option value="8">6–10</option>
+              <option value="13">11–15</option>
+              <option value="18">16–20</option>
+              <option value="25">20+</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="flex items-center gap-2">
+                <input type="checkbox" id="has_conservatory" name="has_conservatory" class="form-checkbox" />
+                <span class="text-sm">Conservatory</span>
+              </label>
+              <div id="conservatory-panels" class="hidden mt-2">
+                <label for="conservatory_panels" class="text-xs">How many panels?</label>
+                <input type="number" id="conservatory_panels" name="conservatory_panels" min="0" max="30" value="0"
+                  class="form-input" />
+              </div>
+            </div>
+            <div>
+              <label class="flex items-center gap-2">
+                <input type="checkbox" id="has_orangery" name="has_orangery" class="form-checkbox" />
+                <span class="text-sm">Orangery</span>
+              </label>
+              <div id="orangery-windows" class="hidden mt-2">
+                <label for="orangery_windows" class="text-xs">How many windows?</label>
+                <input type="number" id="orangery_windows" name="orangery_windows" min="0" max="30" value="0"
+                  class="form-input" />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">Is the back accessible without you being home?</label>
+            <select id="rear_access" name="rear_access" class="form-input">
+              <option value="always">Yes — always accessible</option>
+              <option value="arrange">Need to arrange access</option>
+              <option value="no">No — not accessible</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">How often would you like cleaning?</label>
+            <select id="requested_frequency" name="requested_frequency" class="form-input">
+              <option value="4">Every 4 weeks</option>
+              <option value="8">Every 8 weeks</option>
+              <option value="0">One-off clean</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="notes" class="block text-sm font-medium mb-1">Anything else we should know?</label>
+            <textarea id="notes" name="notes" rows="2" class="form-input"
+              placeholder="e.g. high windows on back, hard to reach, etc."></textarea>
+          </div>
+
+          <div class="mt-4 p-3 rounded-lg" style={`background: ${siteConfig.colors.bgSecondary}`}>
+            <label class="flex items-start gap-2">
+              <input type="checkbox" id="opt_in" name="opt_in" class="form-checkbox mt-1" checked />
+              <span class="text-sm">I'm happy to receive automated reminders and confirmations via my chosen contact method. You can opt out at any time.</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="flex gap-3 mt-6">
+          <button type="button" onclick="showStep(1)" class="btn-back">← Back</button>
+          <button type="submit" id="submit-btn" class="btn-submit flex-1">Get my estimate</button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Result -->
+    <div id="quote-result" class="hidden text-center py-8">
+      <div class="text-4xl mb-4">✅</div>
+      <h3 class="text-2xl font-bold mb-2">Your estimated price</h3>
+      <p class="text-3xl font-bold mb-4" style={`color: ${siteConfig.colors.accent}`} id="price-range"></p>
+      <p class="text-lg mb-2">per clean</p>
+      <p class="mt-4">{siteConfig.founder} will be in touch within 24 hours to confirm your exact quote.</p>
+      <div class="mt-6 flex justify-center gap-4">
+        <a href={`https://wa.me/${siteConfig.whatsapp}`}
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-white font-semibold"
+          style="background: #25D366">
+          💬 WhatsApp {siteConfig.founder}
+        </a>
+        <a href={`tel:${siteConfig.phone}`}
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold border-2"
+          style={`border-color: ${siteConfig.colors.accent}; color: ${siteConfig.colors.accent}`}>
+          📞 Call {siteConfig.founder}
+        </a>
+      </div>
+    </div>
+
+    <!-- Error -->
+    <div id="quote-error" class="hidden text-center py-8 text-red-600">
+      <p class="text-lg font-bold">Something went wrong</p>
+      <p id="error-message" class="mt-2"></p>
+      <p class="mt-4">Please call us on <a href={`tel:${siteConfig.phone}`} class="underline">{siteConfig.phone}</a> or <a href={`https://wa.me/${siteConfig.whatsapp}`} class="underline">WhatsApp us</a>.</p>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ API_URL, TENANT_ID }}>
+  function showStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.add('hidden'));
+    document.getElementById(`step-${n}`).classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Toggle conservatory/orangery panels
+  document.getElementById('has_conservatory')?.addEventListener('change', (e) => {
+    document.getElementById('conservatory-panels').classList.toggle('hidden', !e.target.checked);
+  });
+  document.getElementById('has_orangery')?.addEventListener('change', (e) => {
+    document.getElementById('orangery-windows').classList.toggle('hidden', !e.target.checked);
+  });
+
+  document.getElementById('quote-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Calculating...';
+
+    const form = e.target;
+    const data = {
+      name: form.name.value,
+      address: form.address.value,
+      postcode: form.postcode.value,
+      phone: form.phone.value,
+      email: form.email.value || null,
+      preferred_contact: form.preferred_contact.value,
+      payment_method: form.payment_method.value,
+      is_commercial: form.is_commercial.value === 'true',
+      property_type: form.property_type.value,
+      floors: form.floors.value,
+      num_windows: parseInt(form.num_windows.value),
+      has_conservatory: form.has_conservatory.checked,
+      conservatory_panels: parseInt(form.conservatory_panels?.value || '0'),
+      has_orangery: form.has_orangery.checked,
+      orangery_windows: parseInt(form.orangery_windows?.value || '0'),
+      rear_access: form.rear_access.value,
+      requested_frequency: parseInt(form.requested_frequency.value),
+      notes: form.notes.value || null,
+      opted_in: form.opt_in.checked,
+    };
+
+    try {
+      const res = await fetch(`${API_URL}/leads/${TENANT_ID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || 'Request failed');
+      }
+
+      const result = await res.json();
+      document.getElementById('price-range').textContent =
+        `£${result.estimated_price.low.toFixed(2)} – £${result.estimated_price.high.toFixed(2)}`;
+      document.getElementById('quote-form').classList.add('hidden');
+      document.getElementById('quote-result').classList.remove('hidden');
+
+    } catch (err) {
+      document.getElementById('error-message').textContent = err.message;
+      document.getElementById('quote-form').classList.add('hidden');
+      document.getElementById('quote-error').classList.remove('hidden');
+    }
+  });
+</script>
+
+<style>
+  .form-input {
+    width: 100%;
+    padding: 0.625rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+    transition: border-color 0.15s;
+  }
+  .form-input:focus {
+    outline: none;
+    border-color: var(--accent, #3AADE0);
+    box-shadow: 0 0 0 3px rgba(58, 173, 224, 0.1);
+  }
+  .form-checkbox {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 0.25rem;
+  }
+  .btn-next, .btn-submit {
+    display: block;
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .btn-next { background: var(--accent, #3AADE0); }
+  .btn-submit { background: var(--accent, #3AADE0); }
+  .btn-next:hover, .btn-submit:hover { opacity: 0.9; }
+  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-back {
+    padding: 0.875rem 1.5rem;
+    border: 2px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background: white;
+    cursor: pointer;
+  }
+  .btn-back:hover { background: #f9fafb; }
+  .hidden { display: none; }
+</style>
